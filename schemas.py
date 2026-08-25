@@ -130,8 +130,10 @@ class QueryResult(sdl.Entity):
     job_id: str = ""
     state: str = ""
     total_bytes_processed: int = 0
+    estimated_bytes_processed: int = 0
     total_rows: int = 0
     rows: list[dict] = []
+    columns: list[str] = []
     schema_fields: list[str] = []
     cache_hit: bool = False
 
@@ -145,10 +147,12 @@ class BigQueryJob(sdl.Entity):
     job_id: str = ""
     state: str = ""
     query_preview: str = ""
+    query: str = ""
     total_bytes_processed: int = 0
     created: str = ""
     user_email: str = ""
     error: str = ""
+    error_message: str = ""
 
 
 class JobList(sdl.Entity):
@@ -175,6 +179,7 @@ class ListScheduledQueriesParams(BaseModel):
 class ScheduledQuery(sdl.Entity):
     name: str = ""
     display_name: str = ""
+    query: str = ""
     schedule: str = ""
     next_run_time: str = ""
     state: str = ""

@@ -1668,6 +1668,11 @@
             "title": "Total Bytes Processed",
             "type": "integer"
           },
+          "estimated_bytes_processed": {
+            "default": 0,
+            "title": "Estimated Bytes Processed",
+            "type": "integer"
+          },
           "total_rows": {
             "default": 0,
             "title": "Total Rows",
@@ -1680,6 +1685,14 @@
               "type": "object"
             },
             "title": "Rows",
+            "type": "array"
+          },
+          "columns": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Columns",
             "type": "array"
           },
           "schema_fields": {
@@ -1822,6 +1835,11 @@
             "title": "Query Preview",
             "type": "string"
           },
+          "query": {
+            "default": "",
+            "title": "Query",
+            "type": "string"
+          },
           "total_bytes_processed": {
             "default": 0,
             "title": "Total Bytes Processed",
@@ -1840,6 +1858,11 @@
           "error": {
             "default": "",
             "title": "Error",
+            "type": "string"
+          },
+          "error_message": {
+            "default": "",
+            "title": "Error Message",
             "type": "string"
           }
         },
@@ -1969,6 +1992,11 @@
                 "title": "Query Preview",
                 "type": "string"
               },
+              "query": {
+                "default": "",
+                "title": "Query",
+                "type": "string"
+              },
               "total_bytes_processed": {
                 "default": 0,
                 "title": "Total Bytes Processed",
@@ -1987,6 +2015,11 @@
               "error": {
                 "default": "",
                 "title": "Error",
+                "type": "string"
+              },
+              "error_message": {
+                "default": "",
+                "title": "Error Message",
                 "type": "string"
               }
             },
@@ -2322,6 +2355,11 @@
                 "title": "Display Name",
                 "type": "string"
               },
+              "query": {
+                "default": "",
+                "title": "Query",
+                "type": "string"
+              },
               "schedule": {
                 "default": "",
                 "title": "Schedule",
@@ -2570,6 +2608,11 @@
           "display_name": {
             "default": "",
             "title": "Display Name",
+            "type": "string"
+          },
+          "query": {
+            "default": "",
+            "title": "Query",
             "type": "string"
           },
           "schedule": {
