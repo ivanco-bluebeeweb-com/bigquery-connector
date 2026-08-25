@@ -40,8 +40,9 @@ def _connect_form() -> ui.UINode:
             icon="database",
         ),
         ui.Form(
-            action="connect_bigquery", submit_label="Подключить", full_width=True,
+            action="connect_bigquery", submit_label="Подключить",
             children=[
+              ui.Stack(direction="v", gap=3, align="stretch", children=[
                 _field("Service Account JSON", ui.Password(
                     param_name="service_account_json",
                     placeholder="Вставьте содержимое JSON-файла целиком",
@@ -50,6 +51,7 @@ def _connect_form() -> ui.UINode:
                     param_name="label",
                     placeholder="Мой GCP-проект",
                 )),
+              ]),
             ],
         ),
     ])
@@ -153,12 +155,14 @@ async def bigquery_jobs_panel(ctx) -> ui.UINode:
     )
     return ui.Stack(direction="v", gap=2, align="stretch", children=[
         ui.Form(
-            action="execute_sql", submit_label="Выполнить запрос", full_width=True,
+            action="execute_sql", submit_label="Выполнить запрос",
             children=[
+              ui.Stack(direction="v", gap=3, align="stretch", children=[
                 _field("SQL-запрос", ui.Input(
-                    param_name="sql", multiline=True,
+                    param_name="sql",
                     placeholder="SELECT * FROM `project.dataset.table` LIMIT 100",
                 )),
+              ]),
             ],
         ),
         ui.Divider(),
