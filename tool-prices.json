@@ -1,0 +1,21 @@
+{
+  "connect_bigquery": 0,
+  "list_connections": 0,
+  "disconnect_bigquery": 0,
+  "list_datasets": 8,
+  "get_dataset": 8,
+  "create_dataset": 16,
+  "delete_dataset": 16,
+  "list_tables": 8,
+  "get_table": 8,
+  "delete_table": 16,
+  "execute_sql": 20,
+  "get_job": 8,
+  "list_jobs": 8,
+  "cancel_job": 16,
+  "list_scheduled_queries": 8,
+  "create_scheduled_query": 16,
+  "delete_scheduled_query": 16,
+  "run_scheduled_query": 20,
+  "audit_project": 40
+}
