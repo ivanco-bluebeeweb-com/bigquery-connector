@@ -69,7 +69,7 @@ async def execute_sql(ctx, params: ExecuteQueryParams) -> ActionResult:
         total_rows=int(result.get("totalRows", 0) or 0),
         columns=col_names,
         rows=parsed_rows,
-    ))
+    ), summary="Execute sql done.")
 
 
 @chat.function(
@@ -89,7 +89,7 @@ async def get_job(ctx, params: GetJobParams) -> ActionResult:
         row = await bqc.get_job(ctx, conn, params.job_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=_to_job(row))
+    return ActionResult.success(data=_to_job(row), summary="Job retrieved.")
 
 
 @chat.function(
@@ -109,7 +109,7 @@ async def list_jobs(ctx, params: ListJobsParams) -> ActionResult:
         rows = await bqc.list_jobs(ctx, conn, params.max_results or 50)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=JobList(items=[_to_job(j) for j in rows]))
+    return ActionResult.success(data=JobList(items=[_to_job(j) for j in rows]), summary="Jobs listed.")
 
 
 @chat.function(
@@ -130,4 +130,4 @@ async def cancel_job(ctx, params: CancelJobParams) -> ActionResult:
         await bqc.cancel_job(ctx, conn, params.job_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Job '{params.job_id}' cancel requested."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Job '{params.job_id}' cancel requested."), summary="Cancel job done.")

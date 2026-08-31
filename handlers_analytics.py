@@ -68,4 +68,4 @@ async def audit_project(ctx, params: AuditProjectParams) -> ActionResult:
         ))
 
     summary = f"{len(datasets)} dataset(s) checked, {len(findings)} finding(s)."
-    return ActionResult.success(data=AuditReport(findings=findings, summary=summary))
+    return ActionResult.success(data=AuditReport(findings=findings, summary=summary), summary="Project audit ready.")

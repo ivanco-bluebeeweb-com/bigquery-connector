@@ -43,7 +43,7 @@ async def list_scheduled_queries(ctx, params: ListScheduledQueriesParams) -> Act
         rows = await bqc.list_scheduled_queries(ctx, conn, params.location or "us")
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=ScheduledQueryList(items=[_to_sq(t) for t in rows]))
+    return ActionResult.success(data=ScheduledQueryList(items=[_to_sq(t) for t in rows]), summary="Scheduled queries listed.")
 
 
 @chat.function(
@@ -67,7 +67,7 @@ async def create_scheduled_query(ctx, params: CreateScheduledQueryParams) -> Act
         )
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=_to_sq(row))
+    return ActionResult.success(data=_to_sq(row), summary="Scheduled query created.")
 
 
 @chat.function(
@@ -88,7 +88,7 @@ async def delete_scheduled_query(ctx, params: DeleteScheduledQueryParams) -> Act
         await bqc.delete_scheduled_query(ctx, conn, params.transfer_config_name)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DeleteResult(ok=True, detail="Scheduled query deleted."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail="Scheduled query deleted."), summary="Scheduled query deleted.")
 
 
 @chat.function(
@@ -109,4 +109,4 @@ async def run_scheduled_query(ctx, params: RunScheduledQueryParams) -> ActionRes
         await bqc.run_scheduled_query(ctx, conn, params.transfer_config_name)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DeleteResult(ok=True, detail="Scheduled query run triggered."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail="Scheduled query run triggered."), summary="Scheduled query run requested.")

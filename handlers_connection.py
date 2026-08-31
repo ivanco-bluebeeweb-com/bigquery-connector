@@ -92,7 +92,7 @@ async def connect_bigquery(ctx, params: ConnectBigQueryParams) -> ActionResult:
     conns = await _load_connections(ctx)
     conns.append(conn)
     await _save_connections(ctx, conns)
-    return ActionResult.success(data=_to_entity(conn))
+    return ActionResult.success(data=_to_entity(conn), summary="Bigquery connected.")
 
 
 @chat.function(
@@ -106,7 +106,7 @@ async def connect_bigquery(ctx, params: ConnectBigQueryParams) -> ActionResult:
 async def list_connections(ctx, params: NoParams) -> ActionResult:
     """List connections."""
     conns = await _load_connections(ctx)
-    return ActionResult.success(data=ProviderConnectionList(items=[_to_entity(c) for c in conns]))
+    return ActionResult.success(data=ProviderConnectionList(items=[_to_entity(c) for c in conns]), summary="Connections listed.")
 
 
 @chat.function(
@@ -125,4 +125,4 @@ async def disconnect_bigquery(ctx, params: DisconnectBigQueryParams) -> ActionRe
     if len(remaining) == len(conns):
         return ActionResult.error(f"No BigQuery connection with id '{params.connection_id}'.")
     await _save_connections(ctx, remaining)
-    return ActionResult.success(data=DeleteResult(ok=True, detail="Disconnected."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail="Disconnected."), summary="Bigquery disconnected.")

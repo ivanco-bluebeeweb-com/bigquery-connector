@@ -54,7 +54,7 @@ async def list_datasets(ctx, params: ListDatasetsParams) -> ActionResult:
         rows = await bqc.list_datasets(ctx, conn)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DatasetList(items=[_to_dataset(d) for d in rows]))
+    return ActionResult.success(data=DatasetList(items=[_to_dataset(d) for d in rows]), summary="Datasets listed.")
 
 
 @chat.function(
@@ -74,7 +74,7 @@ async def get_dataset(ctx, params: GetDatasetParams) -> ActionResult:
         row = await bqc.get_dataset(ctx, conn, params.dataset_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=_to_dataset(row))
+    return ActionResult.success(data=_to_dataset(row), summary="Dataset retrieved.")
 
 
 @chat.function(
@@ -98,7 +98,7 @@ async def create_dataset(ctx, params: CreateDatasetParams) -> ActionResult:
         )
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=_to_dataset(row))
+    return ActionResult.success(data=_to_dataset(row), summary="Dataset created.")
 
 
 @chat.function(
@@ -119,7 +119,7 @@ async def delete_dataset(ctx, params: DeleteDatasetParams) -> ActionResult:
         await bqc.delete_dataset(ctx, conn, params.dataset_id, params.delete_contents)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Dataset '{params.dataset_id}' deleted."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Dataset '{params.dataset_id}' deleted."), summary="Dataset deleted.")
 
 
 @chat.function(
@@ -139,7 +139,7 @@ async def list_tables(ctx, params: ListTablesParams) -> ActionResult:
         rows = await bqc.list_tables(ctx, conn, params.dataset_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=TableList(items=[_to_table(t) for t in rows]))
+    return ActionResult.success(data=TableList(items=[_to_table(t) for t in rows]), summary="Tables listed.")
 
 
 @chat.function(
@@ -159,7 +159,7 @@ async def get_table(ctx, params: GetTableParams) -> ActionResult:
         row = await bqc.get_table(ctx, conn, params.dataset_id, params.table_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=_to_table(row))
+    return ActionResult.success(data=_to_table(row), summary="Table retrieved.")
 
 
 @chat.function(
@@ -180,4 +180,4 @@ async def delete_table(ctx, params: DeleteTableParams) -> ActionResult:
         await bqc.delete_table(ctx, conn, params.dataset_id, params.table_id)
     except bqc.ClientFail as exc:
         return ActionResult.error(str(exc))
-    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Table '{params.table_id}' deleted."))
+    return ActionResult.success(data=DeleteResult(ok=True, detail=f"Table '{params.table_id}' deleted."), summary="Table deleted.")
