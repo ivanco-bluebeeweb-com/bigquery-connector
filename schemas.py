@@ -31,6 +31,8 @@ class ProviderConnection(sdl.Entity):
 
 
 class ProviderConnectionList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     items: list[ProviderConnection] = []
 
 
@@ -39,6 +41,8 @@ class DisconnectBigQueryParams(BaseModel):
 
 
 class DeleteResult(sdl.Entity):
+    id: str = ""
+    title: str = ""
     ok: bool = True
     detail: str = ""
 
@@ -50,6 +54,8 @@ class ListDatasetsParams(BaseModel):
 
 
 class BigQueryDataset(sdl.Entity):
+    id: str = ""
+    title: str = ""
     dataset_id: str = ""
     location: str = ""
     default_table_expiration_ms: int = 0
@@ -57,6 +63,8 @@ class BigQueryDataset(sdl.Entity):
 
 
 class DatasetList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     items: list[BigQueryDataset] = []
 
 
@@ -91,6 +99,8 @@ class ListTablesParams(BaseModel):
 
 
 class BigQueryTable(sdl.Entity):
+    id: str = ""
+    title: str = ""
     table_id: str = ""
     dataset_id: str = ""
     num_rows: int = 0
@@ -100,6 +110,8 @@ class BigQueryTable(sdl.Entity):
 
 
 class TableList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     items: list[BigQueryTable] = []
 
 
@@ -127,6 +139,8 @@ class ExecuteQueryParams(BaseModel):
 
 
 class QueryResult(sdl.Entity):
+    id: str = ""
+    title: str = ""
     job_id: str = ""
     state: str = ""
     total_bytes_processed: int = 0
@@ -144,6 +158,8 @@ class GetJobParams(BaseModel):
 
 
 class BigQueryJob(sdl.Entity):
+    id: str = ""
+    title: str = ""
     job_id: str = ""
     state: str = ""
     query_preview: str = ""
@@ -156,6 +172,8 @@ class BigQueryJob(sdl.Entity):
 
 
 class JobList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     items: list[BigQueryJob] = []
 
 
@@ -177,6 +195,8 @@ class ListScheduledQueriesParams(BaseModel):
 
 
 class ScheduledQuery(sdl.Entity):
+    id: str = ""
+    title: str = ""
     name: str = ""
     display_name: str = ""
     query: str = ""
@@ -186,6 +206,8 @@ class ScheduledQuery(sdl.Entity):
 
 
 class ScheduledQueryList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     items: list[ScheduledQuery] = []
 
 
@@ -219,11 +241,15 @@ class AuditProjectParams(BaseModel):
 
 
 class AuditFinding(sdl.Entity):
+    id: str = ""
+    title: str = ""
     kind: str = ""
     detail: str = ""
     severity: str = "medium"
 
 
 class AuditReport(sdl.Entity):
+    id: str = ""
+    title: str = ""
     findings: list[AuditFinding] = []
     summary: str = ""
